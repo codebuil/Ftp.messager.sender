@@ -2,6 +2,7 @@ import datetime
 import os
 from ftplib import FTP
 import tkinter as tk
+import random
 
 def enviar_mensagem():
     # Obtém o conteúdo da área de texto
@@ -12,7 +13,7 @@ def enviar_mensagem():
     data_hora = agora.strftime("%Y-%m-%d %H:%M:%S")
 
     # Formata a mensagem
-    mensagem_formatada = f"{data_hora},{mensagem}"
+    mensagem_formatada = f"{mensagem},{data_hora}"
 
     # Escreve a mensagem localmente
     escrever_log_local(mensagem_formatada)
@@ -26,19 +27,20 @@ def escrever_log_local(mensagem):
 
 def enviar_para_telemovel(mensagem):
     # Configurações FTP
-    endereco_ftp = "192.168.1.5"
+    endereco_ftp = "192.168.1.7"
     porta_ftp = 2121
 
     # Conecta ao servidor FTP
     with FTP() as ftp:
         ftp.connect(endereco_ftp, porta_ftp)
         ftp.login()
-
+        nome_arquivo =""
         # Nome do arquivo no telemóvel (data e hora sem espaços)
-        nome_arquivo = datetime.datetime.now().strftime("%Y%m%d_%H%M%S.txt")
+        with open("data.tmp","rb") as arquivo:
+            nome_arquivo = str(arquivo.read(15))+str(random.randint(0,10000000000 ))
 
          # Escreve o arquivo temporário no telemóvel
-        with open("data.tmp", "rb") as arquivo:
+        with open("data.tmp","rb") as arquivo:
             ftp.storbinary(f"STOR {nome_arquivo}", arquivo)
 
 
