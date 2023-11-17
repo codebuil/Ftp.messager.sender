@@ -23,7 +23,7 @@ def escrever_log_local(mensagem):
 
 def enviar_para_telemovel(mensagem,title):
     # Configurações FTP
-    endereco_ftp = "192.168.1.6"
+    endereco_ftp = "192.168.1.7"
     porta_ftp = 2121
 
     # Conecta ao servidor FTP
@@ -44,7 +44,7 @@ def enviar_para_telemovel(mensagem,title):
 print("\x1bc\x1b[43;30mstart application:")
 
 # Chama a função para criar e enviar a mensagem imediatamente
-title,mensagem = criar_mensagem()
+mensagem,title = criar_mensagem()
 escrever_log_local(mensagem)
 enviar_para_telemovel(mensagem,title)
 
