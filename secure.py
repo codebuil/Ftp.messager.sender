@@ -27,7 +27,7 @@ def enviar_para_telemovel(mensagem, title):
     # Configurações SFTP
     endereco_sftp = "192.168.1.10"
     usuario_sftp = "ftpuser"
-    senha_sftp = "dataxhoney"
+    senha_sftp = "xpto"
 
     # Nome do arquivo no telemóvel (data e hora sem espaços)
     rnd = random.randint(0, 10000000000)
